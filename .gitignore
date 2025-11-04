@@ -1,0 +1,22 @@
+# Sensitive / local files
+.env
+db.sqlite3
+venv/
+__pycache__/
+
+# IDE / Visual Studio
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Python cache
+*.pyc
+*.pyo
+*.pyd
+
+# Django static/media
+/staticfiles
+/media
