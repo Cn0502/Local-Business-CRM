@@ -26,7 +26,7 @@ source venv/bin/activate
 
 
 
-&nbsp;You should see (venv) before your prompt when activated.
+ You should see (venv) before your prompt when activated.
 
 
 
@@ -60,47 +60,17 @@ py -c "from django.core.management.utils import get\_random\_secret\_key; print(
 
 
 
-&nbsp;Never commit .env to GitHub — it’s ignored for security.
+ Never commit .env to GitHub — it’s ignored for security.
 
 
 
-4\. Apply Migrations
-
-
-
-Initialize Django’s database tables:
-
-
+python manage.py makemigrations
 
 python manage.py migrate
 
 
 
-5\. Create a Superuser
-
-
-
-If you need access to the Django admin site:
-
-
-
 python manage.py createsuperuser
-
-
-
-
-
-Then visit:
-
-http://127.0.0.1:8000/admin
-
-
-
-6\.Run the Development Server
-
-
-
-Start the local dev server:
 
 
 
