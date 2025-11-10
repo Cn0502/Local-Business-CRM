@@ -1,0 +1,34 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h1>Your Cart</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left;">Product</th>
+            <th>Qty</th>
+            <th>Unit</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in cart %}
+        <tr>
+            <td style="text-align:left;">{{ row.product.name }}</td>
+            <td style="text-align:center;">{{ row.quantity }}</td>
+            <td style="text-align:right;">${{ row.unit_price }}</td>
+            <td style="text-align:right;">${{ row.line_total }}</td>
+            <td><a href="{% url 'cart_remove' row.product.id %}">Remove</a></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" style="text-align:center;">Your cart is empty.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p><strong>Cart Total:</strong> ${{ cart.total }}</p>
+{% if cart.total > 0 %}
+<p><a href="{% url 'checkout' %}">Checkout</a></p>
+{% endif %}
+{% endblock %}

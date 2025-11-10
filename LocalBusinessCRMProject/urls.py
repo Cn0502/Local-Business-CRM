@@ -3,10 +3,11 @@ Definition of urls for LocalBusinessCRMProject.
 """
 
 from datetime import datetime
-from django.urls import path
+from django.urls import path, include
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from app import forms, views
+from app.views import product_list
 
 
 urlpatterns = [
@@ -27,4 +28,6 @@ urlpatterns = [
          name='login'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('admin/', admin.site.urls),
+    path("", include("orders.urls")),
+    path("products/", product_list, name="product_list"),
 ]

@@ -1,0 +1,54 @@
+﻿{% extends "base.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<h1>Checkout</h1>
+
+<h2>Order Summary</h2>
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:left;">Product</th>
+            <th>Qty</th>
+            <th>Unit</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            <td style="text-align:left;">{{ row.product.name }}</td>
+            <td style="text-align:center;">{{ row.quantity }}</td>
+            <td style="text-align:right;">${{ row.unit_price }}</td>
+            <td style="text-align:right;">${{ row.line_total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" style="text-align:right;"><strong>Cart Total:</strong></td>
+            <td style="text-align:right;"><strong>${{ cart.total }}</strong></td>
+        </tr>
+    </tfoot>
+</table>
+
+<hr>
+
+<h2>Contact</h2>
+<form method="post" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    <div>
+        {{ form.email.label_tag }}<br>
+        {{ form.email }}
+        {% if form.email.errors %}<div style="color:red">{{ form.email.errors }}</div>{% endif %}
+    </div>
+    <div style="margin-top:0.75rem;">
+        {{ form.notes.label_tag }}<br>
+        {{ form.notes }}
+    </div>
+
+    <div style="margin-top:1rem;">
+        <button type="submit">Place Order</button>
+        <a href="{% url 'cart_detail' %}" style="margin-left:1rem;">Back to cart</a>
+    </div>
+</form>
+{% endblock %}

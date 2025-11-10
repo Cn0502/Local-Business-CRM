@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html lang="en">
+<nav>
+    <a href="/">Home</a> · <a href="/products/">Products</a> · <a href="/cart/">Cart</a>
+</nav>
+
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Local Business CRM{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+    <header>
+      
+    </header>
+
+    <main style="max-width: 900px; margin: 2rem auto;">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer style="text-align:center; padding:2rem 0; opacity:.7;">
+        &copy; {{ now|date:"Y" }} Local Business CRM
+    </footer>
+    <script src="{% static 'js/site.js' %}"></script>
+</body>
+</html>

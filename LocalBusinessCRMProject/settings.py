@@ -15,6 +15,8 @@ import posixpath
 from dotenv import load_dotenv
 load_dotenv()
 
+from django.urls import include, path
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,7 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "orders", # added in orders
 ]
+
+
+
 
 # Middleware framework
 # https://docs.djangoproject.com/en/2.1/topics/http/middleware/
@@ -54,6 +60,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+# Cart/order session ID
+CART_SESSION_ID = "cart"
+
 
 ROOT_URLCONF = 'LocalBusinessCRMProject.urls'
 
@@ -114,3 +125,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+# Turning off the primary key warning
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+TEMPLATES[0]["DIRS"] = [BASE_DIR / "templates"]

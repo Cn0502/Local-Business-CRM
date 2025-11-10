@@ -4,8 +4,9 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>LocalBusinessCRMProject</Name>
     <RootNamespace>LocalBusinessCRMProject</RootNamespace>
-    <InterpreterId>Global|VisualStudio|Scripts</InterpreterId>
+    <InterpreterId>MSBuild|.venv|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>Pytest</TestFramework>
+    <SuppressPackageInstallationPrompt>True</SuppressPackageInstallationPrompt>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -34,6 +35,7 @@
   <ItemGroup>
     <Compile Include="app\admin.py" />
     <Compile Include="app\forms.py" />
+    <Compile Include="app\management\commands\load_products.py" />
     <Compile Include="app\models.py" />
     <Compile Include="app\tests.py" />
     <Compile Include="app\views.py" />
@@ -44,9 +46,21 @@
     <Compile Include="LocalBusinessCRMProject\settings.py" />
     <Compile Include="LocalBusinessCRMProject\urls.py" />
     <Compile Include="LocalBusinessCRMProject\wsgi.py" />
+    <Compile Include="orders\admin.py" />
+    <Compile Include="orders\apps.py" />
+    <Compile Include="orders\cart.py" />
+    <Compile Include="orders\forms.py" />
+    <Compile Include="orders\migrations\__init__.py" />
+    <Compile Include="orders\models.py" />
+    <Compile Include="orders\tests.py" />
+    <Compile Include="orders\urls.py" />
+    <Compile Include="orders\views.py" />
+    <Compile Include="orders\__init__.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
+    <Folder Include="app\management\" />
+    <Folder Include="app\management\commands\" />
     <Folder Include="app\migrations\" />
     <Folder Include="app\static\" />
     <Folder Include="app\static\app\" />
@@ -55,9 +69,18 @@
     <Folder Include="app\static\app\scripts\" />
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
+    <Folder Include="app\templates\orders\" />
     <Folder Include="LocalBusinessCRMProject\" />
+    <Folder Include="orders\" />
+    <Folder Include="orders\migrations\" />
+    <Folder Include="seed_data\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\product_list.html" />
+    <Content Include="app\templates\base.html" />
+    <Content Include="app\templates\orders\cart_detail.html" />
+    <Content Include="app\templates\orders\checkout.html" />
+    <Content Include="app\templates\orders\checkout_success.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
@@ -88,6 +111,7 @@
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />
+    <Content Include="seed_data\products.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.html">
@@ -96,6 +120,17 @@
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|VisualStudio|Scripts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include=".venv\">
+      <Id>.venv</Id>
+      <Version>3.12</Version>
+      <Description>.venv (Python 3.12 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 

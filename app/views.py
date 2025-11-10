@@ -5,6 +5,8 @@ Definition of views.
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpRequest
+from django.apps import apps
+from django.shortcuts import render
 
 def home(request):
     """Renders the home page."""
@@ -43,3 +45,9 @@ def about(request):
             'year':datetime.now().year,
         }
     )
+
+
+def product_list(request):
+    Product = apps.get_model("app", "Product")  
+    products = Product.objects.all().order_by("id")
+    return render(request, "app/product_list.html", {"products": products})
