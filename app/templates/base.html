@@ -1,27 +1,47 @@
-﻿<!doctype html>
+﻿{% load static %}
+<!DOCTYPE html>
 <html lang="en">
-<nav>
-    <a href="/">Home</a> · <a href="/products/">Products</a> · <a href="/cart/">Cart</a>
-</nav>
-
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Local Business CRM{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/site.css' %}">
-</head>
-<body>
-    <header>
-      
-    </header>
 
-    <main style="max-width: 900px; margin: 2rem auto;">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'app/content/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'app/content/style.css' %}">
+</head>
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">Local Business CRM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'crm_dashboard' %}">CRM</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cart/">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/checkout/">Checkout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <main class="container py-5">
         {% block content %}{% endblock %}
     </main>
 
-    <footer style="text-align:center; padding:2rem 0; opacity:.7;">
-        &copy; {{ now|date:"Y" }} Local Business CRM
+    <!-- FOOTER -->
+    <footer class="bg-dark text-light text-center py-3 mt-auto">
+        <small>© {{ now|date:"Y" }} Local Business CRM. All rights reserved.</small>
     </footer>
-    <script src="{% static 'js/site.js' %}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

@@ -30,4 +30,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("orders.urls")),
     path("products/", product_list, name="product_list"),
+    path('crm/', views.crm_dashboard, name='crm_dashboard'),
+    
+
 ]

@@ -1,32 +1,44 @@
-{% extends "app/layout.html" %}
-
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
 {% block content %}
 
-<div class="jumbotron">
-    <h1>Django</h1>
-    <p class="lead">Django is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://www.djangoproject.com/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
+<!-- HERO SECTION -->
+<section class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-dark">Welcome to Local Business CRM</h1>
+    <p class="lead text-muted">Manage your products, orders, and customers in one place.</p>
+    <a href="{% url 'crm_dashboard' %}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+</section>
 
-<div class="row">
+<!-- FEATURE CARDS -->
+<div class="row g-4 text-center">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            Django gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://djangobook.com/django-tutorials/">Learn more &raquo;</a></p>
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">CRM Dashboard</h5>
+                <p class="card-text">Monitor performance and manage departments efficiently.</p>
+                <a href="{% url 'crm_dashboard' %}" class="btn btn-outline-primary">Open</a>
+            </div>
+        </div>
     </div>
+
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>The Python Package Index is a repository of software for the Python programming language.</p>
-        <p><a class="btn btn-default" href="https://pypi.org/">Learn more &raquo;</a></p>
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Products</h5>
+                <p class="card-text">Browse and manage your product listings and categories.</p>
+                <a href="{% url 'product_list' %}" class="btn btn-outline-success">View</a>
+            </div>
+        </div>
     </div>
+
     <div class="col-md-4">
-        <h2>Microsoft Azure</h2>
-        <p>You can easily publish to Microsoft Azure using Visual Studio. Find out how you can host your application using a free trial today.</p>
-        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5 class="card-title">Checkout</h5>
+                <p class="card-text">Simulate the ordering workflow and track transactions.</p>
+                <a href="/checkout/" class="btn btn-outline-warning">Go</a>
+            </div>
+        </div>
     </div>
 </div>
 

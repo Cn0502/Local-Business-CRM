@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}CRM Dashboard{% endblock %}
+{% block content %}
+<h1 class="mb-4 fw-bold">CRM Dashboard</h1>
+<p class="text-muted mb-5">Welcome to the internal management panel. Here’s a quick overview of your business data.</p>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm border-primary">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Total Products</h5>
+                <h2 class="fw-bold">{{ total_products }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm border-success">
+            <div class="card-body">
+                <h5 class="card-title text-success">Departments</h5>
+                <h2 class="fw-bold">{{ departments }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3 class="mb-3">Quick Actions</h3>
+<div class="d-flex flex-wrap gap-3">
+    <a href="{% url 'product_list' %}" class="btn btn-outline-primary">View Products</a>
+    <a href="/checkout/" class="btn btn-outline-success">Checkout</a>
+    <a href="/admin/" class="btn btn-outline-dark">Admin Panel</a>
+</div>
+{% endblock %}

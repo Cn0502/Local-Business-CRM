@@ -76,6 +76,7 @@
     <Folder Include="seed_data\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\crm_dashboard.html" />
     <Content Include="app\templates\app\product_list.html" />
     <Content Include="app\templates\base.html" />
     <Content Include="app\templates\orders\cart_detail.html" />
