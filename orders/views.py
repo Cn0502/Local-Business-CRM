@@ -9,6 +9,8 @@ from .cart import Cart
 from .models import Order, OrderItem
 from .forms import CheckoutForm
 
+from decimal import Decimal, InvalidOperation
+
 def _get_product_or_404(product_id: int):
     Product = apps.get_model("app", "Product")  # change "app" if needed
     try:
@@ -18,8 +20,14 @@ def _get_product_or_404(product_id: int):
 
 def cart_add(request, product_id: int):
     _get_product_or_404(product_id)
+    qty_str = request.GET.get("qty", "1")
+    try:
+        qty = Decimal(str(qty_str))
+    except (InvalidOperation, TypeError):
+        qty = Decimal("1")
+    if qty <= 0:
+        qty = Decimal("1")
     cart = Cart(request)
-    qty = int(request.GET.get("qty", 1))
     cart.add(product_id, quantity=qty)
     messages.success(request, "Item added to cart.")
     return redirect("cart_detail")

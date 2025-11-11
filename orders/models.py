@@ -1,15 +1,25 @@
 # orders/models.py
 from decimal import Decimal
+from http.client import ACCEPTED
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
+from django.core.validators import MinValueValidator
+
+from decimal import Decimal, InvalidOperation
+
 class Order(models.Model):
     class Status(models.TextChoices):
         DRAFT = "draft", "Draft"
+        CREATED = "created", "Created"
         PENDING = "pending", "Pending Payment"
-        PAID = "paid", "Paid"
-        FULFILLED = "fulfilled", "Fulfilled"
+        ACCEPTED = "accepted", "Accepted"
+        DISPATCHED = "dispatched", "Dispatched"
+        PREP = "preparing", "Preparing"
+        READY = "ready", "Ready for Pickup"
+        #PAID = "paid", "Paid"
+        COMPLETE = "complete", "Complete"
         CANCELED = "canceled", "Canceled"
 
     user = models.ForeignKey(
@@ -47,7 +57,12 @@ class OrderItem(models.Model):
     product_name = models.CharField(max_length=200)
     product_sku = models.CharField(max_length=64, blank=True)
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
-    quantity = models.PositiveIntegerField()
+
+    quantity = models.DecimalField(
+        max_digits=8, decimal_places=2,
+        validators=[MinValueValidator(Decimal("0.01"))]
+    )
+
     line_total = models.DecimalField(max_digits=10, decimal_places=2, default=Decimal("0.00"))
 
     class Meta:
