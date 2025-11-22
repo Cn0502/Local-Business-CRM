@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Department Workboard{% endblock %}
+{% block content %}
+
+<h1>Department Workboard</h1>
+
+<form method="get" style="margin-bottom:1rem;">
+    <label for="dept">Department:</label>
+    <select name="department" id="dept" onchange="this.form.submit()">
+        <option value="">All departments</option>
+        {% for dept in departments %}
+        <option value="{{ dept }}" {% if dept == current_department %} selected{% endif %}>
+            {{ dept }}
+        </option>
+        {% endfor %}
+    </select>
+    <noscript><button type="submit">Filter</button></noscript>
+</form>
+
+{% if orders %}
+<table style="width:100%; border-collapse:collapse;">
+    <thead>
+        <tr>
+            <th style="text-align:left; border-bottom:1px solid #ddd;">Order #</th>
+            <th style="text-align:left; border-bottom:1px solid #ddd;">Customer</th>
+            <th style="text-align:left; border-bottom:1px solid #ddd;">Created</th>
+            <th style="text-align:left; border-bottom:1px solid #ddd;">Status</th>
+            <th style="text-align:left; border-bottom:1px solid #ddd;">Items (summary)</th>
+            <th style="text-align:center; border-bottom:1px solid #ddd;">View</th>
+            <th style="text-align:center; border-bottom:1px solid #ddd;">Change Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td style="padding:.4rem;">#{{ order.id }}</td>
+            <td style="padding:.4rem;">
+                {% if order.email %}{{ order.email }}{% else %}(no email){% endif %}
+            </td>
+            <td style="padding:.4rem;">{{ order.created_at }}</td>
+            <td style="padding:.4rem;">{{ order.get_status_display }}</td>
+            <td style="padding:.4rem;">
+                {% with order.items.all as items %}
+                {% if items %}
+                {% for item in items|slice:":3" %}
+                {{ item.product_name }} ({{ item.quantity|floatformat:2 }}){% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                {% if items|length > 3 %} ...{% endif %}
+                {% else %}
+                no items
+                {% endif %}
+                {% endwith %}
+            </td>
+            <td style="text-align:center; padding:.4rem;">
+                <a href="{% url 'order_detail' order.id %}">View</a>
+            </td>
+            <td style="text-align:center; padding:.4rem;">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <input type="hidden" name="order_id" value="{{ order.id }}">
+                    <select name="status">
+                        {% for code,label in status_choices %}
+                        <option value="{{ code }}" {% if code == order.status %}selected{% endif %}>
+                            {{ label }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No incomplete orders{% if current_department %} for {{ current_department }}{% endif %}.</p>
+{% endif %}
+
+{% endblock %}

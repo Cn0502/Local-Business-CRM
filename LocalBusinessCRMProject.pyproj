@@ -82,6 +82,8 @@
     <Content Include="app\templates\orders\cart_detail.html" />
     <Content Include="app\templates\orders\checkout.html" />
     <Content Include="app\templates\orders\checkout_success.html" />
+    <Content Include="app\templates\orders\department_orders.html" />
+    <Content Include="app\templates\orders\order_detail.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

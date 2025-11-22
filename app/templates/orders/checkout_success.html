@@ -1,7 +1,65 @@
 ﻿{% extends "base.html" %}
+{% block title %}Order {{ order.id }}{% endblock %}
 {% block content %}
 <h1>Thanks!</h1>
-<p>Your order #{{ order.id }} was created.</p>
-<p><strong>Total:</strong> ${{ order.grand_total }}</p>
-<p><a href="/">Continue shopping</a></p>
+<p>Your order <strong>#{{ order.id }}</strong> was created.</p>
+
+<p>
+    <strong>Status:</strong> {{ order.get_status_display }}<br>
+    {% if order.email %}<strong>Email:</strong> {{ order.email }}{% endif %}
+</p>
+
+<h2>Order Summary</h2>
+<table style="width:100%; border-collapse:collapse;">
+    <thead>
+        <tr>
+            <th style="text-align:left; border-bottom:1px solid #ddd; padding:.5rem;">Product</th>
+            <th style="text-align:center; border-bottom:1px solid #ddd; padding:.5rem;">Qty</th>
+            <th style="text-align:right; border-bottom:1px solid #ddd; padding:.5rem;">Price</th>
+            <th style="text-align:right; border-bottom:1px solid #ddd; padding:.5rem;">Line Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.items.all %}
+        <tr>
+            <td style="padding:.5rem;">{{ item.product_name }}</td>
+            <td style="text-align:center; padding:.5rem;">{{ item.quantity|floatformat:2 }}</td>
+            <td style="text-align:right; padding:.5rem;">${{ item.unit_price|floatformat:2 }}</td>
+            <td style="text-align:right; padding:.5rem;">${{ item.line_total|floatformat:2 }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" style="padding:.5rem;">No items found on this order.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" style="text-align:right; padding:.5rem;"><strong>Subtotal:</strong></td>
+            <td style="text-align:right; padding:.5rem;"><strong>${{ order.subtotal|floatformat:2 }}</strong></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align:right; padding:.5rem;">Tax:</td>
+            <td style="text-align:right; padding:.5rem;">${{ order.tax_total|floatformat:2 }}</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align:right; padding:.5rem;">Shipping:</td>
+            <td style="text-align:right; padding:.5rem;">${{ order.shipping_total|floatformat:2 }}</td>
+        </tr>
+        {% if order.discount_total and order.discount_total != 0 %}
+        <tr>
+            <td colspan="3" style="text-align:right; padding:.5rem;">Discounts:</td>
+            <td style="text-align:right; padding:.5rem;">- ${{ order.discount_total|floatformat:2 }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td colspan="3" style="text-align:right; padding:.75rem; border-top:1px solid #ddd;"><strong>Grand Total:</strong></td>
+            <td style="text-align:right; padding:.75rem; border-top:1px solid #ddd;"><strong>${{ order.grand_total|floatformat:2 }}</strong></td>
+        </tr>
+    </tfoot>
+</table>
+
+<p style="margin-top:1rem;">
+    <a href="/products/">Continue shopping</a> · <a href="/cart/">View cart</a>
+</p>
 {% endblock %}

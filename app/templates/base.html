@@ -12,20 +12,33 @@
     <link rel="stylesheet" href="{% static 'app/content/style.css' %}">
 </head>
 <body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Local Business CRM</a>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="/">Local Business CRM</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{% url 'crm_dashboard' %}">CRM</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/cart/">Cart</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/checkout/">Checkout</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'crm_dashboard' %}">CRM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'product_list' %}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cart_detail' %}">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'checkout' %}">Checkout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'department_orders' %}">Workboard</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -42,6 +55,10 @@
     </footer>
 
     <!-- Bootstrap JS -->
-    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+    <!--<script src="{% static 'bootstrap.bundle.min.js' %}"></script> -->
+    <!--<script src="{% static 'app/scripts/bootstrap.bundle.min.js' %}"></script> -->
+
+    <script src="{% static 'app/scripts/jquery-1.10.2.min.js' %}"></script>
+    <script src="{% static 'app/scripts/bootstrap.min.js' %}"></script>
 </body>
-</html>
+        </html>

@@ -17,6 +17,8 @@ load_dotenv()
 
 from django.urls import include, path
 
+from decimal import Decimal
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -135,3 +137,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 TEMPLATES[0]["DIRS"] = [BASE_DIR / "templates"]
+
+# Sales Tax Additions
+TAX_MODE = "flat"                      # "flat"
+TAX_DEFAULT_RATE = Decimal("0.1110")   # 11.1% default tax rate
+TAX_INCLUSIVE_PRICING = False          # prices are pre-tax; "false" means tax is added at checkout 

@@ -57,6 +57,9 @@ class Product(models.Model):
     sku = models.CharField(max_length=40, blank=True, unique=False)
     is_active = models.BooleanField(default=True)
 
+    # Added for sales tax handling
+    is_taxable = models.BooleanField(default=True)
+
     def __str__(self):
         return self.name
 

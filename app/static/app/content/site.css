@@ -40,3 +40,18 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+/* Ensure navbar looks like a Bootstrap navbar */
+.navbar-nav {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+    .navbar-nav .nav-item {
+        margin-right: 0.75rem;
+    }
+
+    .navbar-nav .nav-link {
+        display: inline-block;
+    }
