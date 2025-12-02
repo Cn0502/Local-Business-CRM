@@ -8,7 +8,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'app/content/bootstrap.min.css' %}">
-
     <link rel="stylesheet" href="{% static 'app/content/style.css' %}">
 </head>
 <body class="bg-light">
@@ -24,18 +23,27 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'crm_dashboard' %}">CRM</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'product_list' %}">Products</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'cart_detail' %}">Cart</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'checkout' %}">Checkout</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'department_orders' %}">Workboard</a>
                     </li>
@@ -44,21 +52,15 @@
         </div>
     </nav>
 
-    <!-- PAGE CONTENT -->
     <main class="container py-5">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- FOOTER -->
     <footer class="bg-dark text-light text-center py-3 mt-auto">
-        <small>© {{ now|date:"Y" }} Local Business CRM. All rights reserved.</small>
+        <small>(C) {{ now|date:"Y" }} Local Business CRM. All rights reserved.</small>
     </footer>
-
-    <!-- Bootstrap JS -->
-    <!--<script src="{% static 'bootstrap.bundle.min.js' %}"></script> -->
-    <!--<script src="{% static 'app/scripts/bootstrap.bundle.min.js' %}"></script> -->
 
     <script src="{% static 'app/scripts/jquery-1.10.2.min.js' %}"></script>
     <script src="{% static 'app/scripts/bootstrap.min.js' %}"></script>
 </body>
-        </html>
+</html>

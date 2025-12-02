@@ -71,3 +71,6 @@ def crm_dashboard(request):
         "year": datetime.now().year,
     }
     return render(request, "app/crm_dashboard.html", context)
+
+def about_page(request):
+    return render(request, 'about.html')
