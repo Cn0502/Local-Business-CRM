@@ -1,0 +1,19 @@
+name,price,stock,department,category,subcategory,meat_type,unit,sku,is_active,is_taxable
+Ribeye Steak,15.99,50,butcher,meat,,beef,lb,,TRUE,TRUE
+New York Strip Steak,14.49,50,butcher,meat,,beef,lb,,TRUE,TRUE
+Ground Beef (80/20),5.99,50,butcher,meat,,beef,lb,,TRUE,TRUE
+Beef Short Ribs,9.99,50,butcher,meat,,beef,lb,,TRUE,TRUE
+Brisket (Whole),6.49,50,butcher,meat,,beef,lb,,TRUE,TRUE
+Sirloin Tip Roast,8.79,50,butcher,meat,,beef,lb,,TRUE,TRUE
+Beef Stew Meat,6.99,50,butcher,meat,,beef,lb,,TRUE,TRUE
+Beef Filet Mignon,26.99,50,butcher,meat,,beef,lb,,TRUE,TRUE
+Pork Loin Roast,5.49,50,butcher,meat,,pork,lb,,TRUE,TRUE
+Pork Chops,4.29,50,butcher,meat,,pork,lb,,TRUE,TRUE
+Pork Tenderloin,6.99,50,butcher,meat,,pork,lb,,TRUE,TRUE
+Bacon (Thick Cut),7.49,50,butcher,meat,,pork,lb,,TRUE,TRUE
+Pork Shoulder,3.99,50,butcher,meat,,pork,lb,,TRUE,TRUE
+Breakfast Sausage,4.79,50,butcher,meat,,pork,lb,,TRUE,TRUE
+Chicken Breast (Boneless Skinless),4.79,50,butcher,meat,,chicken,lb,,TRUE,TRUE
+Whole Chicken,2.49,50,butcher,meat,,chicken,lb,,TRUE,TRUE
+Chicken Thighs (Bone-In),2.49,50,butcher,meat,,chicken,lb,,TRUE,TRUE
+Chicken Wings,3.99,50,butcher,meat,,chicken,lb,,TRUE,TRUE

@@ -1,0 +1,33 @@
+name,price,stock,department,category,subcategory,meat_type,unit,sku,is_active,is_taxable
+Telera Roll,0.89,50,bakery,bread,telera,,ea,,TRUE,TRUE
+Bolillo Roll,0.79,50,bakery,bread,bolillo,,ea,,TRUE,TRUE
+Concha (Pan Dulce),1.49,50,bakery,sweet bread,concha,,ea,,TRUE,TRUE
+Oreja (Palmier),1.59,50,bakery,sweet bread,oreja,,ea,,TRUE,TRUE
+Cuerno (Sweet Croissant),1.59,50,bakery,sweet bread,cuerno,,ea,,TRUE,TRUE
+Empanada de Piña,1.99,50,bakery,sweet bread,empanada,,ea,,TRUE,TRUE
+Empanada de Calabaza,1.99,50,bakery,sweet bread,empanada,,ea,,TRUE,TRUE
+Tres Leches Cake Slice,3.99,50,bakery,cake,tres leches,,slice,,TRUE,TRUE
+Flan Individual,2.99,50,bakery,dessert,flan,,ea,,TRUE,TRUE
+Rosca de Reyes (Whole),16.99,10,bakery,bread,rosca,,ea,,TRUE,TRUE
+Tacos de Asada Plate (3),11.99,50,restaurant,plate,tacos asada,,order,,TRUE,TRUE
+Tacos al Pastor Plate (3),11.49,50,restaurant,plate,tacos pastor,,order,,TRUE,TRUE
+Burrito de Asada,9.99,50,restaurant,burrito,,,order,,TRUE,TRUE
+Burrito de Pollo,9.49,50,restaurant,burrito,,,order,,TRUE,TRUE
+Quesadilla de Queso,7.99,50,restaurant,quesadilla,cheese,,order,,TRUE,TRUE
+Quesadilla de Asada,10.49,50,restaurant,quesadilla,asada,,order,,TRUE,TRUE
+Enchiladas Rojas Plate,12.49,50,restaurant,plate,enchiladas rojas,,order,,TRUE,TRUE
+Enchiladas Verdes Plate,12.49,50,restaurant,plate,enchiladas verdes,,order,,TRUE,TRUE
+Pozole Rojo (Large),13.99,50,restaurant,soup,pozole,,order,,TRUE,TRUE
+Menudo - Large Weekend Only,14.99,50,restaurant,soup,menudo,,order,,TRUE,TRUE
+Tortilla Chips & Salsa,4.99,50,restaurant,side,chips and salsa,,order,,TRUE,TRUE
+Family Taco Tray (10 Tacos),34.99,50,restaurant,family pack,taco tray,,order,,TRUE,TRUE
+Kids Cheese Quesadilla,5.99,50,restaurant,kids,quesadilla,,order,,TRUE,TRUE
+Chilaquiles Verdes (Breakfast),10.99,50,restaurant,breakfast,chilaquiles verdes,,order,,TRUE,TRUE
+Huevos con Chorizo Plate,10.49,50,restaurant,breakfast,huevos con chorizo,,order,,TRUE,TRUE
+Propane Tank Exchange (20 lb),24.99,50,propane,propane,exchange,,tank,,TRUE,TRUE
+Propane New Tank Filled (20 lb),59.99,50,propane,propane,new tank,,tank,,TRUE,TRUE
+Propane Refill per Pound,1.99,50,propane,propane,refill,,lb,,TRUE,TRUE
+Tortillas de Maíz (Dozen),2.49,50,bakery,tortillas,maiz,,pack,,TRUE,TRUE
+Tortillas de Harina (10-inch Dozen),3.49,50,bakery,tortillas,harina,,pack,,TRUE,TRUE
+Tortillas de Harina (Burrito Size 12-inch),3.99,50,bakery,tortillas,harina,,pack,,TRUE,TRUE
+Tortillas de Maíz Frescas (Handmade),3.99,50,bakery,tortillas,handmade,,pack,,TRUE,TRUE
