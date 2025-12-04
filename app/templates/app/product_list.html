@@ -1,12 +1,13 @@
-﻿{% extends "base.html" %}
+﻿{% extends "layout.html" %}
 {% block title %}Products{% endblock %}
+
 {% block content %}
 <h1>Products</h1>
 
 <ul>
     {% for product in products %}
     <li>
-        {{ product.name }} — ${{ product.price }}
+        {{ product.name }} - ${{ product.price }}
         <form action="{% url 'cart_add' product.id %}" method="get" style="display:inline;">
             <input type="number" name="qty" value="1" min="0.01" step="0.01" style="width:4rem;">
             <button type="submit">Add to cart</button>
@@ -16,5 +17,7 @@
     <li>No products yet. <a href="/admin/">Add some in Admin</a></li>
     {% endfor %}
 </ul>
+
 <p><a href="{% url 'cart_detail' %}">Go to cart</a></p>
+
 {% endblock %}

@@ -1,10 +1,73 @@
-{% extends "app/layout.html" %}
+﻿{% extends "layout.html" %}
+{% block title %}About Us - La Cima Market{% endblock %}
 
 {% block content %}
+<div class="container py-5">
 
-<h2>{{ title }}.</h2>
-<h3>{{ message }}</h3>
+    <div class="text-center mb-5">
+        <h1 class="fw-bold display-5">About La Cima Market</h1>
+        <p class="text-muted fs-5">
+            Proudly serving our community since 2007
+        </p>
+    </div>
 
-<p>Use this area to provide additional information.</p>
+    <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+            <h3 class="fw-bold mb-3">Our Story</h3>
+            <p class="text-muted fs-6">
+                La Cima Market is a family-run business established in 2007.
+                As one of the few stores in the rural Summit Street area - where the nearest Walmart is a
+                20 minute drive away - we have proudly served our community by offering accessible general goods,
+                Latin American ingredients, and regional delicacies.
+            </p>
 
+            <p class="text-muted fs-6">
+                For over 18 years, we have been committed to providing essential services including:
+            </p>
+
+            <ul class="text-muted fs-6">
+                <li>Propane Refueling</li>
+                <li>Freshly Baked Goods and Tortilleria</li>
+                <li>Full-Service Butcher Shop</li>
+                <li>Deli and Prepared Foods</li>
+            </ul>
+
+            <div class="mt-4">
+                <p class="mb-1"><strong>Store Phone:</strong> (520) 555-1234</p>
+                <p><strong>Address:</strong> 12345 S Summit Street, Tucson, AZ</p>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="row g-4">
+
+                <div class="col-12">
+                    <div class="rounded shadow-sm overflow-hidden">
+                        <img src="/static/img/store_front.jpg" class="img-fluid" alt="Store Front">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="rounded shadow-sm overflow-hidden">
+                        <img src="/static/img/butcher_shop.jpg" class="img-fluid" alt="Butcher Shop">
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="rounded shadow-sm overflow-hidden">
+                        <img src="/static/img/bakery.jpg" class="img-fluid" alt="Bakery">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <p class="text-muted">
+            Thank you for supporting your local family-owned market.
+        </p>
+    </div>
+
+</div>
 {% endblock %}
