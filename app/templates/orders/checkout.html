@@ -1,7 +1,9 @@
-﻿{% extends "base.html" %}
+﻿{% extends "layout.html" %}
 {% block title %}Checkout{% endblock %}
 {% block content %}
 <h1>Checkout</h1>
+
+
 
 <h2>Order Summary</h2>
 <table>
@@ -25,8 +27,28 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="3" style="text-align:right;"><strong>Cart Total:</strong></td>
-            <td style="text-align:right;"><strong>${{ cart.total }}</strong></td>
+            <td colspan="3" class="text-end"><strong>Subtotal:</strong></td>
+            <td class="text-end"><strong>${{ subtotal|floatformat:2 }}</strong></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text-end">Tax:</td>
+            <td class="text-end">${{ tax_total|floatformat:2 }}</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text-end">Shipping:</td>
+            <td class="text-end">${{ shipping_total|floatformat:2 }}</td>
+        </tr>
+        {% if discount_total != 0 %}
+        <tr>
+            <td colspan="3" class="text-end">Discount:</td>
+            <td class="text-end">-${{ discount_total|floatformat:2 }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td colspan="3" class="text-end pt-2 border-top"><strong>Grand Total:</strong></td>
+            <td class="text-end pt-2 border-top">
+                <strong>${{ grand_total|floatformat:2 }}</strong>
+            </td>
         </tr>
     </tfoot>
 </table>
@@ -36,18 +58,46 @@
 <h2>Contact</h2>
 <form method="post" action="{% url 'checkout' %}">
     {% csrf_token %}
+
     <div>
+        {{ form.name.label_tag }}<br>
+        {{ form.name }}
+        {% if form.name.errors %}
+        <div style="color:red">{{ form.name.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div style="margin-top:0.75rem;">
         {{ form.email.label_tag }}<br>
         {{ form.email }}
-        {% if form.email.errors %}<div style="color:red">{{ form.email.errors }}</div>{% endif %}
+        {% if form.email.errors %}
+        <div style="color:red">{{ form.email.errors }}</div>
+        {% endif %}
     </div>
+
+    <div style="margin-top:0.75rem;">
+        {{ form.phone.label_tag }}<br>
+        {{ form.phone }}
+        {% if form.phone.errors %}
+        <div style="color:red">{{ form.phone.errors }}</div>
+        {% endif %}
+    </div>
+
     <div style="margin-top:0.75rem;">
         {{ form.notes.label_tag }}<br>
         {{ form.notes }}
     </div>
 
     <div style="margin-top:1rem;">
+        {% if store_open %}
         <button type="submit">Place Order</button>
+        {% else %}
+        <button type="submit" disabled>Place Order</button>
+        <div style="color:red; margin-top:0.5rem;">
+            Online orders are accepted only between 7:00 AM and 7:00 PM.
+            Please return during business hours.
+        </div>
+        {% endif %}
         <a href="{% url 'cart_detail' %}" style="margin-left:1rem;">Back to cart</a>
     </div>
 </form>

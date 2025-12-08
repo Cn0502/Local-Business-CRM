@@ -14,8 +14,21 @@ from .forms import CheckoutForm
 
 from decimal import Decimal, InvalidOperation
 
+from django.conf import settings
+
 
 from django.contrib.auth.decorators import login_required
+
+
+# Added for store hours
+def is_store_open():
+    """
+    Returns True if current local time is between 7:00 and 19:00 (7 PM),
+    False otherwise.
+    """
+    now = timezone.localtime(timezone.now())
+    hour = now.hour
+    return 7 <= hour < 19    # open 07:00–18:59, closed 19:00–06:59  7 19
 
 
 def _get_product_or_404(product_id: int):
@@ -37,7 +50,13 @@ def cart_add(request, product_id: int):
     cart = Cart(request)
     cart.add(product_id, quantity=qty)
     messages.success(request, "Item added to cart.")
-    return redirect("cart_detail")
+
+
+    referer = request.META.get("HTTP_REFERER")
+    if referer:
+        return redirect(referer)
+    return redirect("product_list")   # use your actual products URL name
+
 
 def cart_remove(request, product_id: int):
     cart = Cart(request)
@@ -57,24 +76,108 @@ def checkout(request):
         messages.error(request, "Your cart is empty.")
         return redirect("cart_detail")
 
-    if request.method == "GET":
-        initial_email = ""
-        if request.user.is_authenticated and getattr(request.user, "email", ""):
-            initial_email = request.user.email.strip()
-        form = CheckoutForm(initial={"email": initial_email})
-        return render(request, "orders/checkout.html", {"cart": cart, "rows": rows, "form": form})
+    # --- Compute preview totals using same logic style as Order.recompute_totals() ---
+    # Cart subtotal (before tax & shipping)
+    subtotal = cart.total()  # this already sums line_total in your Cart
 
-    # POST: validate, create order + items
+    # Tax rate from settings (e.g. settings.TAX_DEFAULT_RATE = Decimal("0.0875"))
+    rate = getattr(settings, "TAX_DEFAULT_RATE", Decimal("0"))
+
+    tax_total = Decimal("0.00")
+    for r in rows:
+        p = r["product"]
+        line_total = r["line_total"]
+        # only tax taxable products, mirrors is_taxable logic in recompute_totals()
+        if getattr(p, "is_taxable", True):
+            line_tax = (line_total * rate).quantize(Decimal("0.01"))
+            tax_total += line_tax
+
+    shipping_total = Decimal("0.00")
+    discount_total = Decimal("0.00")
+    grand_total = subtotal - discount_total + tax_total + shipping_total
+
+    store_open = is_store_open() 
+
+    # ----- GET: show checkout page with totals -----
+    if request.method == "GET":
+
+        initial_email = ""
+        initial_name = ""
+
+        if request.user.is_authenticated:
+            if getattr(request.user, "email", ""):
+                initial_email = request.user.email.strip()
+            # Try to prefill name from user
+            full_name = request.user.get_full_name().strip()
+            if full_name:
+                initial_name = full_name
+
+
+
+
+        form = CheckoutForm(initial={"email": initial_email, "name": initial_name})
+
+        context = {
+            "cart": cart,
+            "rows": rows,
+            "form": form,
+            "subtotal": subtotal,
+            "tax_total": tax_total,
+            "shipping_total": shipping_total,
+            "discount_total": discount_total,
+            "grand_total": grand_total,
+            "store_open": store_open,
+        }
+        return render(request, "orders/checkout.html", context)
+
+    # ----- POST: validate form -----
     form = CheckoutForm(request.POST)
     if not form.is_valid():
-        return render(request, "orders/checkout.html", {"cart": cart, "rows": rows, "form": form})
+        # re-render the page with same totals so user still sees the full amount
+        context = {
+            "cart": cart,
+            "rows": rows,
+            "form": form,
+            "subtotal": subtotal,
+            "tax_total": tax_total,
+            "shipping_total": shipping_total,
+            "discount_total": discount_total,
+            "grand_total": grand_total,
+            "store_open": store_open,
+        }
+        return render(request, "orders/checkout.html", context)
 
+    if not store_open:
+        messages.error(
+            request,
+            "Online orders are accepted only between 7:00 AM and 7:00 PM. "
+            "Please return during business hours."
+        )
+        context = {
+            "cart": cart,
+         "rows": rows,
+         "form": form,
+         "subtotal": subtotal,
+         "tax_total": tax_total,
+         "shipping_total": shipping_total,
+         "discount_total": discount_total,
+         "grand_total": grand_total,
+         "store_open": store_open,
+        }
+        return render(request, "orders/checkout.html", context, status=403)
+
+
+    # ----- POST valid: create order + items -----
+    name = form.cleaned_data.get("name", "").strip()
     email = form.cleaned_data["email"].strip()
-    # notes = form.cleaned_data.get("notes", "").strip()  # save later if you add a field
+    phone = form.cleaned_data.get("phone", "").strip()
+    # notes = form.cleaned_data.get("notes", "").strip()  # if you add notes later
 
     order = Order.objects.create(
         user=request.user if request.user.is_authenticated else None,
         email=email,
+        customer_name=name,   # NEW
+        phone=phone,          # NEW
         status=Order.Status.PENDING,
     )
 
@@ -83,7 +186,7 @@ def checkout(request):
         p = r["product"]
         qty = r["quantity"]              # should already be a Decimal from Cart
         unit_price = r["unit_price"]     # Decimal
-        is_taxable = getattr(p, "is_taxable", True)   
+        is_taxable = getattr(p, "is_taxable", True)
 
         items.append(OrderItem(
             order=order,
@@ -92,7 +195,7 @@ def checkout(request):
             product_sku=getattr(p, "sku", "") or "",
             unit_price=unit_price,
             quantity=qty,
-            is_taxable=is_taxable,                              
+            is_taxable=is_taxable,
             line_total=(unit_price * qty).quantize(Decimal("0.01")),
         ))
 
@@ -106,16 +209,7 @@ def checkout(request):
     messages.success(request, f"Order #{order.pk} created.")
     return render(request, "orders/checkout_success.html", {"order": order})
 
-    OrderItem.objects.bulk_create(items)
-
-    order.recompute_totals()
-    order.save(update_fields=["subtotal", "discount_total", "tax_total", "shipping_total", "grand_total"])
-
-    cart.clear()
-    messages.success(request, f"Order #{order.pk} created.")
-    return render(request, "orders/checkout_success.html", {"order": order})
-
-@login_required
+@login_required(login_url="login")
 def department_orders(request):
     """
     Department workboard:

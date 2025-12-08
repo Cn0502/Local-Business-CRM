@@ -1,4 +1,4 @@
-﻿{% extends "base.html" %}
+﻿{% extends "layout.html" %}
 {% block title %}Order {{ order.id }}{% endblock %}
 {% block content %}
 <h1>Thanks!</h1>
@@ -6,7 +6,18 @@
 
 <p>
     <strong>Status:</strong> {{ order.get_status_display }}<br>
-    {% if order.email %}<strong>Email:</strong> {{ order.email }}{% endif %}
+
+    {% if order.customer_name %}
+    <strong>Name:</strong> {{ order.customer_name }}<br>
+    {% endif %}
+
+    {% if order.email %}
+    <strong>Email:</strong> {{ order.email }}<br>
+    {% endif %}
+
+    {% if order.phone %}
+    <strong>Phone:</strong> {{ order.phone }}<br>
+    {% endif %}
 </p>
 
 <h2>Order Summary</h2>
