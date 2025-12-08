@@ -1,0 +1,71 @@
+/* === Earth Tone Theme === */
+:root {
+    --brown-dark: #5D473A;
+    --brown-light: #A68A6A;
+    --cream: #F4EDE3;
+    --green-muted: #8C9A6E;
+    --beige: #D8C3A5;
+}
+
+body {
+    background-color: var(--cream);
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--brown-dark) !important;
+}
+
+.navbar-brand,
+.nav-link {
+    color: #fff !important;
+}
+
+    .nav-link:hover {
+        color: var(--beige) !important;
+    }
+
+/* Cards */
+.card {
+    background-color: var(--beige);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Buttons */
+.btn-green {
+    background-color: var(--green-muted);
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 18px;
+}
+
+    .btn-green:hover {
+        background-color: #7e8a62;
+    }
+
+/* Headings */
+h1, h2, h3, h4 {
+    color: var(--brown-dark);
+    font-weight: 700;
+}
+
+/* Hero Section */
+.hero {
+    background-color: var(--beige);
+    border-radius: 14px;
+    padding: 50px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+/* Talavera Decorative Border */
+.talavera-border {
+    width: 100%;
+    height: 30px;
+    background-image: url('/static/img/talavera_pattern.png');
+    background-size: contain;
+    background-repeat: repeat-x;
+    margin-bottom: 20px;
+}

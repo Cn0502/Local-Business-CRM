@@ -37,7 +37,11 @@ class Order(models.Model):
 
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
-    completed_at = models.DateTimeField(null=True, blank=True) 
+    completed_at = models.DateTimeField(null=True, blank=True)
+
+    customer_name = models.CharField("Customer name", max_length=100, blank=True)
+    phone = models.CharField("Phone", max_length=20, blank=True)
+
 
     def __str__(self):
         return f"Order #{self.pk} ({self.get_status_display()})"

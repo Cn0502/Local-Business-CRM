@@ -1,3 +1,5 @@
+# app/views.py
+
 """
 Definition of views.
 """
@@ -9,6 +11,23 @@ from django.apps import apps
 from django.shortcuts import render
 from django.db.models import Count
 from django.shortcuts import redirect
+
+from orders.cart import Cart   # <-- use the same Cart class as cart_detail
+
+from django.utils import timezone
+
+# Added for store hours
+def is_store_open():
+    """
+    Returns True if current local time is between 7:00 and 19:00 (7 PM),
+    False otherwise.
+    """
+    now = timezone.localtime(timezone.now())
+    hour = now.hour
+    return 7 <= hour < 19    # open 07:00–18:59, closed 19:00–06:59
+
+
+
 
 def home(request):
     """Renders the home page."""
@@ -54,9 +73,49 @@ def about(request):
 
 
 def product_list(request):
-    Product = apps.get_model("app", "Product")  
-    products = Product.objects.all().order_by("id")
-    return render(request, "app/product_list.html", {"products": products})
+    Product = apps.get_model("app", "Product")
+
+    # Main product list (only active items)
+    products = (
+        Product.objects
+        .filter(is_active=True)
+        .order_by("department", "name")
+    )
+
+    # ---- Cart summary using Cart helper ----
+    cart = Cart(request)
+    cart_items = list(cart)
+
+    cart_total_qty = 0
+    cart_total_price = 0
+
+    for item in cart_items:
+        if isinstance(item, dict):
+            product = item.get("product")
+            qty = int(item.get("quantity", 0))
+        else:
+            product = getattr(item, "product", None)
+            qty = int(getattr(item, "quantity", 0))
+
+        cart_total_qty += qty
+
+        if product is not None:
+            cart_total_price += product.price * qty
+
+    # Added for store hours
+    store_open = is_store_open()
+
+    context = {
+        "products": products,
+        "cart_items": cart_items,
+        "cart_total_qty": cart_total_qty,
+        "cart_total_price": cart_total_price,
+        "store_open": store_open, 
+    }
+
+    return render(request, "app/product_list.html", context)    
+
+
 
 def crm_dashboard(request):
     """Renders the CRM dashboard page."""
