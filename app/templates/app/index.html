@@ -1,53 +1,57 @@
-{% extends "layout.html" %}
+﻿{% extends "layout.html" %}
+{% load static %}
 {% block title %}Welcome to La Cima Market{% endblock %}
 
 {% block content %}
 
-<!-- Decorative Talavera Top Border -->
+<!-- Decorative Top Border -->
 <div class="talavera-border mb-4"></div>
 
-<!-- Hero Section -->
+<!-- HERO SECTION -->
 <div class="hero container text-center mb-5">
     <h1 class="fw-bold mb-3">Bienvenidos a La Cima Market</h1>
     <p class="fs-5 text-muted mb-4">
         Your local family-run mercado, serving the Summit community since 2007.
     </p>
-
     <a href="/products" class="btn btn-green btn-lg">Shop Products</a>
 </div>
 
-<!-- Services Section -->
+<!-- WHAT WE OFFER -->
 <h2 class="fw-bold mb-3 text-center">What We Offer</h2>
 
 <div class="row g-4 mt-4">
 
+    <!-- Carnicer�a -->
     <div class="col-md-3">
-        <div class="card p-3 text-center">
-            <img src="/static/img/butcher.jpg" class="img-fluid rounded mb-3" alt="Butcher Shop">
+        <div class="card p-3 text-center shadow-sm">
+            <img src="{% static 'app/img/butcher.jpg' %}" class="img-fluid rounded mb-3" alt="Butcher Shop">
             <h5 class="fw-bold">Carniceria</h5>
             <p class="text-muted">Fresh cuts daily from our experienced butchers.</p>
         </div>
     </div>
 
+    <!-- Tortiller�a -->
     <div class="col-md-3">
-        <div class="card p-3 text-center">
-            <img src="/static/img/tortilleria.jpg" class="img-fluid rounded mb-3" alt="Tortilleria">
+        <div class="card p-3 text-center shadow-sm">
+            <img src="{% static 'app/img/tortilleria.jpg' %}" class="img-fluid rounded mb-3" alt="Tortillería">
             <h5 class="fw-bold">Tortilleria</h5>
-            <p class="text-muted">Warm, handmade tortillas every morning.</p>
+            <p class="text-muted">Warm, handmade tortillas and bread every morning.</p>
         </div>
     </div>
 
+    <!-- Deli -->
     <div class="col-md-3">
-        <div class="card p-3 text-center">
-            <img src="/static/img/deli.jpg" class="img-fluid rounded mb-3" alt="Deli">
+        <div class="card p-3 text-center shadow-sm">
+            <img src="{% static 'app/img/deli.jpg' %}" class="img-fluid rounded mb-3" alt="Deli">
             <h5 class="fw-bold">Deli</h5>
             <p class="text-muted">Authentic Mexican meals and fresh ingredients.</p>
         </div>
     </div>
 
+    <!-- Propane -->
     <div class="col-md-3">
-        <div class="card p-3 text-center">
-            <img src="/static/img/propane.jpg" class="img-fluid rounded mb-3" alt="Propane">
+        <div class="card p-3 text-center shadow-sm">
+            <img src="{% static 'app/img/storefront.jpg' %}" class="img-fluid rounded mb-3" alt="Propane">>
             <h5 class="fw-bold">Propane Refills</h5>
             <p class="text-muted">Fast and reliable propane refueling services.</p>
         </div>
@@ -55,17 +59,17 @@
 
 </div>
 
-<!-- Community Message -->
-<div class="mt-5 p-4 rounded" style="background-color:#D8C3A5;">
+<!-- COMMUNITY MESSAGE -->
+<div class="mt-5 p-4 rounded shadow-sm" style="background-color:#D8C3A5;">
     <h3 class="fw-bold text-center mb-3">Proudly Serving the Summit Community</h3>
     <p class="text-center text-muted fs-6 px-3">
-        For over 18 years, La Cima Market has been the heart of the neighborhood, providing essential
+        For over 18 years, La Cima Market has been the heart of the neighborhood. Providing essential
         goods, local ingredients, and a warm place to shop. Thank you for supporting a family-owned
         business that puts community first.
     </p>
 </div>
 
-<!-- Visit Us -->
+<!-- LOCATION -->
 <div class="text-center mt-5">
     <h4 class="fw-bold">Come Visit Us</h4>
     <p class="text-muted mb-3">12345 S Summit Street, Tucson, AZ</p>

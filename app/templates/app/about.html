@@ -1,9 +1,12 @@
 ﻿{% extends "layout.html" %}
+{% load static %}
 {% block title %}About Us - La Cima Market{% endblock %}
 
 {% block content %}
+
 <div class="container py-5">
 
+    <!-- Header -->
     <div class="text-center mb-5">
         <h1 class="fw-bold display-5">About La Cima Market</h1>
         <p class="text-muted fs-5">
@@ -12,7 +15,10 @@
     </div>
 
     <div class="row g-5 align-items-center">
+
+        <!-- LEFT SIDE TEXT -->
         <div class="col-lg-6">
+
             <h3 class="fw-bold mb-3">Our Story</h3>
             <p class="text-muted fs-6">
                 La Cima Market is a family-run business established in 2007.
@@ -36,38 +42,51 @@
                 <p class="mb-1"><strong>Store Phone:</strong> (520) 555-1234</p>
                 <p><strong>Address:</strong> 12345 S Summit Street, Tucson, AZ</p>
             </div>
+
         </div>
 
+        <!-- RIGHT SIDE IMAGES -->
         <div class="col-lg-6">
             <div class="row g-4">
 
+                <!-- Top full-width storefront image -->
                 <div class="col-12">
                     <div class="rounded shadow-sm overflow-hidden">
-                        <img src="/static/img/store_front.jpg" class="img-fluid" alt="Store Front">
+                        <img src="{% static 'app/img/storefront.jpg' %}" class="img-fluid" alt="Store Front">
                     </div>
                 </div>
 
-                <div class="col-6">
+                <!-- Row of 3 smaller images: butcher, bakery, deli -->
+                <div class="col-4">
                     <div class="rounded shadow-sm overflow-hidden">
-                        <img src="/static/img/butcher_shop.jpg" class="img-fluid" alt="Butcher Shop">
+                        <img src="{% static 'app/img/deli.jpg' %}" class="img-fluid rounded mb-3" alt="Deli">
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-4">
                     <div class="rounded shadow-sm overflow-hidden">
-                        <img src="/static/img/bakery.jpg" class="img-fluid" alt="Bakery">
+                        <img src="{% static 'app/img/butcher.jpg' %}" class="img-fluid" alt="Butcher Shop">
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="rounded shadow-sm overflow-hidden">
+                        <img src="{% static 'app/img/tortilleria.jpg' %}" class="img-fluid" alt="Bakery">
                     </div>
                 </div>
 
             </div>
         </div>
+
     </div>
 
     <div class="text-center mt-5">
-        <p class="text-muted">
+        <p class="text-muted fs-5">
             Thank you for supporting your local family-owned market.
         </p>
     </div>
 
 </div>
+
 {% endblock %}
+

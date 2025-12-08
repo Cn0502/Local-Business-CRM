@@ -142,3 +142,8 @@ TEMPLATES[0]["DIRS"] = [BASE_DIR / "templates"]
 TAX_MODE = "flat"                      # "flat"
 TAX_DEFAULT_RATE = Decimal("0.1110")   # 11.1% default tax rate
 TAX_INCLUSIVE_PRICING = False          # prices are pre-tax; "false" means tax is added at checkout 
+
+
+STATICFILES_DIRS = [
+    BASE_DIR / "app" / "static",
+]

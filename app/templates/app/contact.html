@@ -1,20 +1,51 @@
-{% extends "layout.html" %}
+﻿{% extends "layout.html" %}
+{% load static %}
+{% block title %}Contact Us - La Cima Market{% endblock %}
 
 {% block content %}
 
-<h2>{{ title }}.</h2>
-<h3>{{ message }}</h3>
+<!-- Top Decorative Border -->
+<div class="talavera-border mb-4"></div>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="container py-5">
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Contact Us</h1>
+        <p class="text-muted fs-5">We're here to help our community. Reach out anytime.</p>
+    </div>
+
+    <div class="row g-5 justify-content-center">
+
+        <!-- Contact Info Card -->
+        <div class="col-md-6">
+            <div class="p-4 rounded shadow-sm" style="background-color:#F4EDE3;">
+                <h3 class="fw-bold mb-3">Store Information</h3>
+
+                <p><strong>Phone:</strong> (520) 555-1234</p>
+                <p><strong>Address:</strong> 12345 S Summit Street, Tucson, AZ</p>
+                <p><strong>Email:</strong> contact@lacimamarket.com</p>
+
+                <p class="mt-4 text-muted">
+                    Whether you have questions about our products, services, or special orders,
+                    we're committed to providing friendly and helpful customer service.
+                </p>
+            </div>
+        </div>
+
+        <!-- Map Placeholder Card -->
+        <div class="col-md-6">
+            <div class="p-4 rounded shadow-sm" style="background-color:#D8C3A5;">
+                <h3 class="fw-bold mb-3 text-center">Find Us</h3>
+                <img src="{% static 'app/img/storefront.jpg' %}" alt="Storefront" class="img-fluid">
+                <p class="text-center text-muted mt-2">Located in the heart of Summit, AZ.</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Bottom Border -->
+<div class="talavera-border mt-5"></div>
 
 {% endblock %}
